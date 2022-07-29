@@ -13,17 +13,12 @@
     </div>
     
     <div class="box">
-    
-     
         <% for( let i = 0; i<newListItems.length; i++) { %>
         <div class="item">
             <input type="checkbox">
             <p><%= newListItems[i] %></p>
         </div>
-        <% } %>
-        
-       
-
+        <% } %> 
     </div>
     <form class="box  difuminado" action="/" method="post">
         <input type="text" class="difuminado" placeholder="New Item" name="newItem" autofocus autocomplete="off">

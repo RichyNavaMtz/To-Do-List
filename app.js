@@ -9,6 +9,9 @@ app.set('view engine','ejs');
 // para obtener los datos que mandamos el servidor con post
 app.use(express.urlencoded({extended:true}));
 
+//para servir el archivo de estilos
+app.use(express.static('public'));
+
 var items = [];
 
 app.get('/',(req,res)=>{

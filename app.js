@@ -6,26 +6,26 @@ const app = express();
 //seteamos app para usar EJS
 app.set('view engine','ejs');
 
+// para obtener los datos que mandamos el servidor con post
+app.use(express.urlencoded({extended:true}));
+
+var items = [];
+
 app.get('/',(req,res)=>{
-
     const today = new Date();
-    const currentDay = today.getDay();
-    let day = '';
-    if(currentDay == 6 | currentDay == 0){
-        //cuando es fin de semana
-        day = 'weeknd!';
-        res.render('list',{kindOfDay:day});
-    }else{
-        //cuando es dia laboral
-        day = 'weekday!';
-        res.render('list',{kindOfDay:day})
-    }
-        
-    
+    const options ={
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long'
+    };
+    const day = today.toLocaleDateString('en-US',options);
+    res.render('list',{kindOfDay:day,newListItems:items});
+})
 
-
-
-    
+app.post('/',(req,res)=>{
+    let nuevo = req.body.newItem;
+    items.push(nuevo);
+    res.redirect('/')
 })
 
 

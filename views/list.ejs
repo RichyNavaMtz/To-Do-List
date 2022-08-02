@@ -9,20 +9,25 @@
 <body>
     
     <div class="box" id="heading">
-        <h1><%= kindOfDay %></h1>   
+        <h1><%= listName %></h1>   
     </div>
-    
-    <div class="box">
-        <% for( let i = 0; i<newListItems.length; i++) { %>
-        <div class="item">
-            <input type="checkbox">
-            <p><%= newListItems[i] %></p>
-        </div>
-        <% } %> 
+        
+    <!-- list items -->
+    <div class="box"> 
+        <% listItems.forEach(i => { %>
+            <form action="/delete" method="post">
+                <div class="item">
+                    <input type="checkbox" class="izq">
+                    <p class="centro"><%= i.name %></p>
+                    <button type="submit" name="done" class="delete" id="der" value="<%= i._id%>"><i class="fa-solid fa-trash-can fa-lg"></i></button>
+                </div>  
+            </form>
+       <% }) %> 
     </div>
+
     <form class="box  difuminado" action="/" method="post">
         <input type="text" class="difuminado" placeholder="New Item" name="newItem" autofocus autocomplete="off">
-        <button type="submit"><i class="fa-solid fa-plus fa-sm"></i></button>
+        <button type="submit" class="addButton"><i class="fa-solid fa-plus fa-sm"></i></button>
     </form>
 
     <footer>

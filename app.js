@@ -23,11 +23,14 @@ const itemsSchema = {
 };
 
 //mongoose model based on the schema
-const Item = mongoose.model('item', itemsSchema);
+const Item = mongoose.model('Item', itemsSchema);
+
+
+
 
 app.get('/',(req,res)=>{
     Item.find({},(err,listItems)=>{
-        res.render('list',{listName:'Today',listItems:listItems});
+        res.render('list',{listTitle:'Today',listItems:listItems});
     })
 });
 
@@ -51,20 +54,8 @@ app.post('/delete',(req,res)=>{
     res.redirect('/')
 })
 
-const listSchema = {
-    name: String,
-    items:[itemsSchema]
-}
-const List = mongoose.model('List',listSchema)
 
-// app.get('/:listName',(req,res)=>{
-//     let listName = req.params.listName
-//     const list = new List({
-//         name:listName,
-//         items:[]
-//     })
-//     list.save()
-//     res.render('list',{listName:listName,listItems:list})
-// })
+
+
 
 app.listen(3000,console.log('server running on port 3000'));

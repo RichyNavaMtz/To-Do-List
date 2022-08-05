@@ -9,12 +9,12 @@
 <body>
     
     <div class="box" id="heading">
-        <h1><%= listTitle %></h1>   
+        <h1 name="title"><%= listTitle %></h1>   
     </div>
         
     <!-- list items -->
     <div class="box"> 
-        <% listItems.forEach(i => { %>
+        <% newListItems.forEach(i => { %>
             <form action="/delete" method="post">
                 <div class="item">
                     <input type="checkbox" class="izq">
@@ -27,7 +27,7 @@
 
     <form class="box  difuminado" action="/" method="post">
         <input type="text" class="difuminado" placeholder="New Item" name="newItem" autofocus autocomplete="off">
-        <button type="submit" class="addButton"><i class="fa-solid fa-plus fa-sm"></i></button>
+        <button type="submit" class="addButton" value="<%= listTitle %>" name="list" ><i class="fa-solid fa-plus fa-sm"></i></button>
     </form>
 
     <footer>

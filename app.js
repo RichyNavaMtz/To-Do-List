@@ -59,17 +59,27 @@ app.get('/',(req,res)=>{
 });
 
 app.post('/delete',(req,res)=>{
-    let listName = req.body.list
+    let listName = req.body.Title
     let doneId = req.body.done;
     doneId = String(doneId)
-    Item.findByIdAndRemove(doneId,(err)=>{
+
+    if(listName === 'Today'){
+     Item.findByIdAndRemove(doneId,(err)=>{
         if(err){
             console.log(err);
         }else{
             console.log('item borrado');
         }
     })
-    res.redirect('/')
+    res.redirect('/')   
+    }else{
+        List.findOneAndUpdate({name:listName},{$pull: {items:{_id:doneId}}},(err,result)=>{
+           if(err){console.log(err)}
+        })
+        res.redirect('/'+listName)
+    }
+
+    
 })
 
 app.get('/:customListName',(req,res)=>{
